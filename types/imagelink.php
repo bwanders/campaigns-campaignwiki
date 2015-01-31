@@ -39,7 +39,6 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
 
         $size = 48;
         if($hint_size == 'full') $size = null;
-        if($hint_size == 'default') $size = 48;
         if($hint_size == 'icon') $size = 16;
 
         if(is_numeric($hint_size)) $size = max(16, min((int)$hint_size, 300) );
@@ -67,7 +66,7 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
 
     function getInfo() {
         return array(
-            'desc'=>'Displays the \'Image\' field of the reference as a link.',
+            'desc'=>'Displays the \'Image\' field of the reference as a link, the second hint is the default image.',
             'hint'=>'\'normal\', \'icon\', a number between 16 and 300, or \'full\'. Defaults to \'normal\'.'
         );
     }
