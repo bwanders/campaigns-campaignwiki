@@ -28,16 +28,21 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
             $heading = $value;
         }
 
+        list($hint_size, $hint_default) = explode('::', $hint, 2);
+
         $images = $T->fetchTriples($value, 'Image');
         if($images) {
             $image = $images[0]['object'];
+        } else {
+            $image = $hint_default;
         }
 
         $size = 48;
-        if($hint == 'full') $size = null;
-        if($hint == 'icon') $size = 16;
+        if($hint_size == 'full') $size = null;
+        if($hint_size == 'default') $size = 48;
+        if($hint_size == 'icon') $size = 16;
 
-        if(is_numeric($hint)) $size = max(16, min((int)$hint, 300) );
+        if(is_numeric($hint_size)) $size = max(16, min((int)$hint_size, 300) );
 
         if(preg_match('#^(https?|ftp)#i', $image)) {
             $type = 'externalmedia';
