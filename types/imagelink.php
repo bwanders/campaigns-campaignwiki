@@ -32,7 +32,7 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
 
         $images = $T->fetchTriples($value, 'Image');
         if($images) {
-            $image = $images[0]['object'];
+            $image = ':'.$images[0]['object'];
         } else {
             $image = $hint_default;
         }
