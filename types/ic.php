@@ -5,7 +5,7 @@
  * @author  Brend Wanders <b.wanders@13w.nl>
  */
 
-class plugin_strata_type_rule extends plugin_strata_type_ref {
+class plugin_strata_type_ic extends plugin_strata_type_ref {
     function normalize($value, $hint) {
         // let the 'ref' type do all the work
         return parent::normalize($value, 'ic');
