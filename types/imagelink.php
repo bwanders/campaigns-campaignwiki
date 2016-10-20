@@ -28,13 +28,21 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
             $heading = $value;
         }
 
-        list($hint_size, $hint_default) = explode('::', $hint, 2);
+        list($hint_size, $hint_default, $preferred_key) = explode('::', $hint, 3);
 
-        $images = $T->fetchTriples($value, 'Image');
+        // Try preferred key first
+        $images = $T->fetchTriples($value, $preferred_key);
         if($images) {
             $image = ':'.$images[0]['object'];
         } else {
-            $image = $hint_default;
+            // fall back to using 'Image' key
+            $images = $T->fetchTriples($value, 'Image');
+            if($images) {
+                $image = ':'.$images[0]['object'];
+            } else {
+                // fall back to default image hint
+                $image = $hint_default;
+            }
         }
 
         $size = 48;
