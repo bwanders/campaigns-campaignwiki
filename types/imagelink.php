@@ -74,7 +74,7 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
 
     function getInfo() {
         return array(
-            'desc'=>'Displays the \'Image\' field of the reference as a link, the second hint is the default image.',
+            'desc'=>'Displays the \'Image\' field of the reference as a link, the second hint is the default image, the third hint is the preferred key to use over \'Image.\'',
             'hint'=>'\'normal\', \'icon\', a number between 16 and 300, or \'full\'. Defaults to \'normal\'.'
         );
     }
