@@ -8,6 +8,7 @@
 class plugin_strata_type_imagelink extends plugin_strata_type_page {
     function render($mode, &$R, &$T, $value, $hint) {
         $heading = null;
+        $image = null;
         $util =& plugin_load('helper','strata_util');
 
         // only use heading if allowed by configuration
@@ -31,11 +32,14 @@ class plugin_strata_type_imagelink extends plugin_strata_type_page {
         list($hint_size, $hint_default, $preferred_key) = explode('::', $hint, 3);
 
         // Try preferred key first
-        $images = $T->fetchTriples($value, $preferred_key);
-        if($images) {
-            $image = ':'.$images[0]['object'];
-        } else {
-            // fall back to using 'Image' key
+        if(isset($preferred_key)) {
+            $images = $T->fetchTriples($value, $preferred_key);
+            if($images) {
+                $image = ':'.$images[0]['object'];
+            }
+        }
+        // without an image, try the Image key, or fall back to default
+        if($image == null) {
             $images = $T->fetchTriples($value, 'Image');
             if($images) {
                 $image = ':'.$images[0]['object'];
